@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="HelloWorld.Bootstrapper" Version="1.0.0.0" Manufacturer="Greetings, Inc" UpgradeCode="92b5e835-d78f-46b4-b4b9-c8dae98d8b1a">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+		<Chain>
+			<!-- TODO: Add Install .NET . -->
+			<MsiPackage SourceFile="$(var.SolutionDir)\HelloWorld.MSI\bin\Debug\HelloWorld.MSI.msi" />
+		</Chain>
+	</Bundle>
+</Wix>

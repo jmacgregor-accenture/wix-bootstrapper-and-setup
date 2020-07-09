@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define HelloWorld.App_TargetDir=$(var.HelloWorld.App.TargetDir)?>
+	<Product Id="*" Name="HelloWorld.MSI" Language="1033" Version="1.0.0.0" Manufacturer="Greetings, Inc" UpgradeCode="70ac0a9c-08b5-4279-912c-292e5b4a440d">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+    <PropertyRef Id="WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED" />
+    <Condition Message="HelloWorld.MSI requires .NET Framework 4.6.1 or higher.">
+      <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED]]>
+    </Condition>
+
+		<Feature Id="ProductFeature" Title="HelloWorld.MSI" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="HelloWorld.MSI" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+			<Component Id="HelloWorld.App.exe" Guid="b7a0da4c-17fa-4cf3-915f-0f4a6aa3e2d8">
+			  <File Id="HelloWorld.App.exe" Name="HelloWorld.App.exe" Source="$(var.HelloWorld.App_TargetDir)HelloWorld.App.exe" />
+			</Component>
+			<Component Id="HelloWorld.App.exe.config" Guid="4738ac7f-7f37-4058-ae05-2e1ea4f37c05">
+			  <File Id="HelloWorld.App.exe.config" Name="HelloWorld.App.exe.config" Source="$(var.HelloWorld.App_TargetDir)HelloWorld.App.exe.config" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
